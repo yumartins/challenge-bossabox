@@ -1,4 +1,8 @@
 export {
+  default as shadow,
+} from './shadow';
+
+export {
   default as colors,
 } from './colors';
 
