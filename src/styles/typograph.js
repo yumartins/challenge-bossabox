@@ -3,7 +3,7 @@
  */
 const typography = {
   family: '"Source Sans Pro", sans-serif',
-  family_mono: '"PT Mono", sans-serif',
+  family_mono: '"PT Mono", monospace',
 
   weight: {
     regular: 400,

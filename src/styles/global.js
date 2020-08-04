@@ -2,7 +2,12 @@ import { createGlobalStyle } from 'styled-components';
 
 import typograph from './typograph';
 
-const { family } = typograph;
+const {
+  size,
+  weight,
+  family,
+  family_mono,
+} = typograph;
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -54,6 +59,55 @@ const GlobalStyles = createGlobalStyle`
   p,
   span {
     margin: 0;
+  }
+
+  h1 {
+    font-size: ${size.l3};
+    line-height: 50px;
+    font-weight: ${weight.semiBold};
+    letter-spacing: .84px;
+  }
+
+  h2 {
+    font-size: ${size.l2};
+    line-height: 40px;
+    font-weight: ${weight.semiBold};
+    letter-spacing: .72px;
+  }
+
+  h3 {
+    font-size: ${size.l2};
+    line-height: 40px;
+    font-weight: ${weight.semiBold};
+    letter-spacing: .72px;
+  }
+
+  h4 {
+    font-size: ${size.m2};
+    line-height: 32px;
+    font-weight: ${weight.semiBold};
+    letter-spacing: .52px;
+  }
+
+  h5 {
+    font-size: ${size.m1};
+    line-height: 30px;
+    font-weight: ${weight.semiBold};
+    letter-spacing: .48px;
+  }
+
+  p {
+    font-size: ${size.s3};
+    line-height: 26px;
+    font-weight: ${weight.regular};
+    letter-spacing: .4px;
+  }
+
+  small {
+    font-size: ${size.s2};
+    line-height: 24px;
+    font-weight: ${weight.regular};
+    letter-spacing: .36px;
   }
 
   body {
