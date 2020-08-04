@@ -1,0 +1,17 @@
+{
+  "name": "challenge-bossabox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/yumartins/challenge-bossabox.git",
+  "author": "yumartins <yuri@estudioflow.com.br>",
+  "license": "MIT",
+  "scripts": {
+    "build": "next build && next export",
+    "develop": "node ./index.js"
+  },
+  "dependencies": {
+    "next": "^9.5.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
