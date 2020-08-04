@@ -1,16 +1,18 @@
 import Link from 'next/link';
 
 import Logo from '../assets/svgs/logo.svg';
-import Layout from '../layouts/Layout';
+import View from '../styles/pages/home';
 
 const Home = () => (
-  <Layout>
+  <View>
     <Link href="/">
       <a>
         <Logo />
       </a>
     </Link>
-  </Layout>
+
+    <h1>Very useful tools to remember</h1>
+  </View>
 );
 
 export default Home;
