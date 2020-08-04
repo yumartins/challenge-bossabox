@@ -1,6 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
+import colors from './colors';
 import typograph from './typograph';
+
+const {
+  ink,
+} = colors;
 
 const {
   size,
@@ -57,7 +62,9 @@ const GlobalStyles = createGlobalStyle`
   h5,
   h6,
   p,
-  span {
+  span,
+  small {
+    color: ${ink.base};
     margin: 0;
   }
 
@@ -108,6 +115,7 @@ const GlobalStyles = createGlobalStyle`
     line-height: 24px;
     font-weight: ${weight.regular};
     letter-spacing: .36px;
+    font-family: ${family_mono};
   }
 
   body {

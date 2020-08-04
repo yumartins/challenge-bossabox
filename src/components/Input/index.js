@@ -11,24 +11,25 @@ const Input = ({
   name,
   label,
   required,
-  iconLeft,
+  iconRight,
+  ...rest
 }) => (
   <View>
     {label && (
       <label htmlFor={name}>
         {label}
-
         {required && <span>*</span>}
       </label>
     )}
 
     <Wrapper>
-      {iconLeft}
       <input
         {...rest}
         id={name}
         required={required}
       />
+
+      {iconRight}
     </Wrapper>
   </View>
 );
@@ -37,14 +38,14 @@ Input.propTypes = {
   name: string,
   label: oneOfType([bool, string]),
   required: bool,
-  iconLeft: oneOfType([bool, object]),
+  iconRight: oneOfType([bool, object]),
 };
 
 Input.defaultProps = {
   name: '',
   label: false,
   required: false,
-  iconLeft: false,
+  iconRight: false,
 };
 
 export default Input;
