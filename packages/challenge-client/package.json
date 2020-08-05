@@ -1,0 +1,45 @@
+{
+  "name": "challenge-client",
+  "version": "0.0.1",
+  "description": "Bossabox Client",
+  "main": "index.js",
+  "author": "Yuri Martins",
+  "private": false,
+  "scripts": {
+    "app": "node ./index.js",
+    "build": "next build && next export",
+    "develop": "next"
+  },
+  "babel": {
+    "presets": [
+      "next/babel",
+      "module:groovy-babel"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-do-expressions",
+      [
+        "styled-components",
+        {
+          "ssr": true,
+          "displayName": false,
+          "preprocess": false,
+          "minify": true
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-do-expressions": "^7.10.1",
+    "babel-plugin-styled-components": "^1.11.1"
+  },
+  "dependencies": {
+    "@svgr/webpack": "^5.4.0",
+    "axios": "^0.19.2",
+    "next": "^9.5.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1",
+    "swr": "^0.3.0"
+  }
+}

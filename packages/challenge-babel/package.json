@@ -1,0 +1,8 @@
+{
+  "name": "challenge-babel",
+  "version": "0.0.1",
+  "private": false,
+  "author": "Yuri Martins",
+  "description": "app babel preset",
+  "main": "index.js"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "challenge-api",
+  "version": "0.0.1",
+  "private": false,
+  "author": "Yuri Martins",
+  "description": "app api",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "babel src --out-dir ./build --source-maps -D"
+  },
+  "babel": {
+    "presets": [
+      "module:challenge-babel",
+      "@babel/preset-env"
+    ]
+  }
+}
