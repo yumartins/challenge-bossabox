@@ -1,11 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Layout from '../../layouts/Layout';
+import animate from '../animate';
 import colors from '../colors';
 
 const {
   ink,
 } = colors;
+
+const {
+  rubber,
+} = animate;
 
 export const View = styled(Layout)`
   h1 {
@@ -66,4 +71,34 @@ export const Body = styled.div`
       margin-top: 24px;
     }
   }
+`;
+
+export const Modal = styled.div`
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  display: flex;
+  z-index: 999;
+  position: fixed;
+  align-items: center;
+  pointer-events: none;
+  justify-content: center;
+  background-color: ${ink.base}E6;
+
+  & > div {
+    top: 32px;
+    position: relative;
+    transition: all .6s ${rubber};
+  }
+
+  ${({ show }) => show && css`
+    opacity: 1;
+    pointer-events: all;
+
+    & > div {
+      top: 0;
+    }
+  `}
 `;

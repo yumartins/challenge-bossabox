@@ -17,7 +17,12 @@ import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import useFetch from '../hooks/useFetch';
 import api from '../services/api';
-import { Head, View, Body } from '../styles/pages/home';
+import {
+  Body,
+  Head,
+  View,
+  Modal,
+} from '../styles/pages/home';
 
 export const getStaticProps = async () => {
   const { data } = await api.get('/');
@@ -30,6 +35,7 @@ export const getStaticProps = async () => {
 };
 
 const Home = ({ data }) => {
+  const [modal, onModal] = useState(false);
   const [checked, onChecked] = useState(false);
 
   const response = useFetch('/', data);
@@ -65,6 +71,7 @@ const Home = ({ data }) => {
           size="md"
           label="Add"
           appearance="primary"
+          onClick={() => onModal(! modal)}
         />
       </Head>
 
@@ -96,6 +103,12 @@ const Home = ({ data }) => {
           </Card>
         ))}
       </Body>
+
+      <Modal show={modal}>
+        <Card isModal>
+          <h5>Add modal</h5>
+        </Card>
+      </Modal>
     </View>
   );
 };

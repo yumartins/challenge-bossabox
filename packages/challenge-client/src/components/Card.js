@@ -19,9 +19,12 @@ const {
 export const View = styled.div`
   padding: 30px;
   border-radius: 5px;
+  background-color: ${white.base};
 
   ${({ isModal }) => (isModal
     ? css`
+      width: 100%;
+      max-width: 600px;
       box-shadow: ${_400};
     `
     : css`
@@ -42,7 +45,10 @@ const Card = ({
   console.log(children);
 
   return (
-    <View isModal={isModal}>
+    <View
+      {...rest}
+      isModal={isModal}
+    >
       {children}
     </View>
   );
