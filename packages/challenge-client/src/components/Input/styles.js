@@ -19,8 +19,9 @@ const {
 } = animate;
 
 export const Error = styled.span`
+  color: ${red.base};
   font-size: ${size.s2};
-  margin-top: 8px;
+  margin: 8px 0 0 auto;
   line-height: 24px;
   letter-spacing: .36px;
 `;
@@ -98,6 +99,10 @@ export const View = styled.div`
       color: ${red.base};
       border-color: ${red.base};
       background-color: ${red.most_lightest};
+
+      &::placeholder {
+        color: ${red.base};
+      }
     }
   `}
 `;
