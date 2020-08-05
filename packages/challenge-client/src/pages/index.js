@@ -44,6 +44,32 @@ const Home = ({ data }) => {
 
   const { tools } = response.data;
 
+  const inputs = [
+    {
+      name: 'name',
+      label: 'Tool name',
+      required: true,
+      placeholder: 'Enter the name of the tool',
+    },
+    {
+      name: 'link',
+      label: 'Tool link',
+      required: true,
+      placeholder: 'Enter the link of the tool',
+    },
+    {
+      name: 'description',
+      label: 'Tool description',
+      textarea: true,
+      placeholder: 'Enter the description of the tool',
+    },
+    {
+      name: 'tags',
+      label: 'Tags',
+      placeholder: 'Enter tags separated by space',
+    },
+  ];
+
   return (
     <View>
       <Link href="/">
@@ -115,19 +141,12 @@ const Home = ({ data }) => {
           </h4>
 
           <Form>
-            <Input
-              name="name"
-              label="Hello"
-              required
-            />
-
-            <Input
-              error
-              name="message"
-              label="Hello"
-              required
-              textarea
-            />
+            {inputs.map((item) => (
+              <Input
+                {...item}
+                key={item.name}
+              />
+            ))}
           </Form>
         </Card>
       </Modal>
