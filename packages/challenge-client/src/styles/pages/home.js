@@ -31,6 +31,10 @@ export const Head = styled.div`
 export const Body = styled.div`
   margin-top: 64px;
 
+  h4 {
+    text-transform: capitalize;
+  }
+
   p {
     margin-top: 24px;
   }

@@ -30,6 +30,7 @@ const appearances = {
 };
 
 export const Icon = styled.span`
+  display: flex;
   margin-right: 16px;
 `;
 
@@ -85,18 +86,9 @@ export const View = styled.button`
 
   ${({ appearance }) => appearance === appearances.danger && css`
     color: ${red.base};
-    background-color: ${red.most_lightest};
 
     ${Icon} svg path {
       stroke: ${red.base};
-    }
-
-    &:hover {
-      background-color: ${red.lightest};
-    }
-
-    &:focus {
-      background-color: ${red.lighter};
     }
   `}
 
