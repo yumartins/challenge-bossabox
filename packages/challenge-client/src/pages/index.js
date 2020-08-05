@@ -7,6 +7,7 @@ import {
   objectOf,
   oneOfType,
 } from 'prop-types';
+import * as Yup from 'yup';
 
 import IconError from '../assets/svgs/icon-error.svg';
 import IconPlus from '../assets/svgs/icon-plus.svg';
@@ -45,6 +46,9 @@ const Home = ({ data }) => {
 
   const ref = useRef(null);
 
+  /**
+   * List inputs add modal
+   */
   const inputs = [
     {
       name: 'title',
@@ -70,6 +74,35 @@ const Home = ({ data }) => {
       placeholder: 'Enter tags separated by space',
     },
   ];
+
+  /**
+   * Submit form
+   */
+  const submit = async (data, type) => {
+    const add = async () => {
+      try {
+        await Yup.object().shape({ ...schema }).validate(data, {
+          abortEarly: false,
+        });
+      } catch (err) {
+        error(err, ref);
+      }
+    };
+
+    const remove = () => {};
+
+    switch (type) {
+      case 'add':
+        add();
+        break;
+
+      case 'remove':
+        remove();
+        break;
+
+      default: break;
+    }
+  };
 
   return (
     <View>
@@ -153,7 +186,10 @@ const Home = ({ data }) => {
         show={modal}
         onShow={onModal}
       >
-        <FormModal ref={ref}>
+        <FormModal
+          ref={ref}
+          onSubmit={(value) => submit(value, 'add')}
+        >
           {inputs.map((item) => (
             <Input
               {...item}
