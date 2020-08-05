@@ -17,9 +17,7 @@ const Home = () => (
     <Head>
       <Input
         name="search"
-        label="Hello my friend"
         placeholder="search..."
-        required
       />
     </Head>
   </View>

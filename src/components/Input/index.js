@@ -5,13 +5,14 @@ import {
   oneOfType,
 } from 'prop-types';
 
+import IconSearch from '../../assets/svgs/icon-search.svg';
 import { View, Wrapper } from './styles';
 
 const Input = ({
   name,
   label,
   required,
-  iconRight,
+  hasSearch,
   ...rest
 }) => (
   <View>
@@ -22,14 +23,14 @@ const Input = ({
       </label>
     )}
 
-    <Wrapper>
+    <Wrapper hasSearch={hasSearch}>
       <input
         {...rest}
         id={name}
         required={required}
       />
 
-      {iconRight}
+      {hasSearch && <IconSearch />}
     </Wrapper>
   </View>
 );
@@ -38,14 +39,14 @@ Input.propTypes = {
   name: string,
   label: oneOfType([bool, string]),
   required: bool,
-  iconRight: oneOfType([bool, object]),
+  hasSearch: oneOfType([bool, object]),
 };
 
 Input.defaultProps = {
   name: '',
   label: false,
   required: false,
-  iconRight: false,
+  hasSearch: false,
 };
 
 export default Input;
