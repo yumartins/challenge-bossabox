@@ -23,6 +23,8 @@ const Home = () => {
       <Head>
         <Input
           name="search"
+          label="Hello"
+          required
           placeholder="search..."
         />
 

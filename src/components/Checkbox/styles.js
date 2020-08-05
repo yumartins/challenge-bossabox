@@ -1,15 +1,11 @@
 import styled, { css } from 'styled-components';
 
-import { colors, typograph } from '../../styles';
+import { colors } from '../../styles';
 
 const {
   blue,
   white,
 } = colors;
-
-const {
-  size,
-} = typograph;
 
 const View = styled.div`
   width: fit-content;
@@ -37,12 +33,6 @@ const View = styled.div`
         stroke: ${white.base};
       }
     }
-  }
-
-  label {
-    font-size: ${size.s3};
-    line-height: 26px;
-    letter-spacing: .4px;
   }
 
   input {

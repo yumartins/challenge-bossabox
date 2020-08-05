@@ -21,13 +21,6 @@ export const View = styled.div`
   display: flex;
   flex-direction: column;
 
-  input,
-  label {
-    font-size: ${size.s3};
-    line-height: 26px;
-    letter-spacing: .4px;
-  }
-
   label {
     display: flex;
     font-weight: ${weight.semiBold};

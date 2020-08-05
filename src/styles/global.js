@@ -103,7 +103,9 @@ const GlobalStyles = createGlobalStyle`
     letter-spacing: .48px;
   }
 
-  p {
+  p,
+  input,
+  label {
     font-size: ${size.s3};
     line-height: 26px;
     font-weight: ${weight.regular};
