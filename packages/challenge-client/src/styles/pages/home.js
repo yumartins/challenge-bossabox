@@ -22,3 +22,7 @@ export const Head = styled.div`
     margin-left: auto;
   }
 `;
+
+export const Body = styled.div`
+  margin-top: 64px;
+`;

@@ -16,24 +16,24 @@ import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import useFetch from '../hooks/useFetch';
 import api from '../services/api';
-import { Head, View } from '../styles/pages/home';
+import { Head, View, Body } from '../styles/pages/home';
 
 export const getStaticProps = async () => {
   const { data } = await api.get('/');
 
   return {
     props: {
-      res: data,
+      data,
     },
   };
 };
 
-const Home = ({ res }) => {
+const Home = ({ data }) => {
   const [checked, onChecked] = useState(false);
 
-  const { data } = useFetch('/', res);
+  const response = useFetch('/', data);
 
-  console.log(data);
+  const { tools } = response.data;
 
   return (
     <View>
@@ -66,18 +66,38 @@ const Home = ({ res }) => {
           appearance="primary"
         />
       </Head>
+
+      <Body>
+        {tools?.map(({
+          id,
+          tags,
+          title,
+          description,
+        }) => (
+          <div key={id}>
+            <h4>{title}</h4>
+            <p>{description}</p>
+
+            <ul>
+              {tags?.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </Body>
     </View>
   );
 };
 
 Home.propTypes = {
-  res: objectOf(oneOfType(([
+  data: objectOf(oneOfType(([
     object, number, string,
   ]))),
 };
 
 Home.defaultProps = {
-  res: {},
+  data: {},
 };
 
 export default Home;
