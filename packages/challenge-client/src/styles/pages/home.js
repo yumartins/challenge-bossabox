@@ -91,6 +91,17 @@ export const Modal = styled.div`
     top: 32px;
     position: relative;
     transition: all .6s ${rubber};
+
+    & > svg {
+      top: 30px;
+      right: 30px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    h4 svg {
+      margin-right: 12px;
+    }
   }
 
   ${({ show }) => show && css`

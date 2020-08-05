@@ -8,6 +8,7 @@ import {
   oneOfType,
 } from 'prop-types';
 
+import IconCloseModal from '../assets/svgs/icon-close-modal.svg';
 import IconError from '../assets/svgs/icon-error.svg';
 import IconPlus from '../assets/svgs/icon-plus.svg';
 import Logo from '../assets/svgs/logo.svg';
@@ -106,7 +107,13 @@ const Home = ({ data }) => {
 
       <Modal show={modal}>
         <Card isModal>
-          <h5>Add modal</h5>
+          <IconCloseModal onClick={() => onModal(! modal)} />
+
+          <h4>
+            <IconPlus />
+            Add new tool
+          </h4>
+
         </Card>
       </Modal>
     </View>
