@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { Form } from '@unform/web';
 import Link from 'next/link';
 import {
   array,
@@ -9,7 +8,6 @@ import {
   oneOfType,
 } from 'prop-types';
 
-import IconCloseModal from '../assets/svgs/icon-close-modal.svg';
 import IconError from '../assets/svgs/icon-error.svg';
 import IconPlus from '../assets/svgs/icon-plus.svg';
 import Logo from '../assets/svgs/logo.svg';
@@ -24,6 +22,7 @@ import {
   Body,
   Head,
   View,
+  FormModal,
 } from '../styles/pages/home';
 
 export const getStaticProps = async () => {
@@ -43,6 +42,8 @@ const Home = ({ data }) => {
   const response = useFetch('/', data);
 
   const { tools } = response.data;
+
+  const ref = useRef(null);
 
   const inputs = [
     {
@@ -105,13 +106,21 @@ const Home = ({ data }) => {
       <Body>
         {tools?.map(({
           id,
+          link,
           tags,
           title,
           description,
         }) => (
           <Card key={id}>
             <div>
-              <h4>{title}</h4>
+              <a
+                href={link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <h4>{title}</h4>
+              </a>
+
               <Button
                 icon={<IconError />}
                 size="sm"
@@ -131,11 +140,14 @@ const Home = ({ data }) => {
         ))}
       </Body>
 
+      {/**
+       * Modal for add tool
+       */}
       <Modal
         show={modal}
         onShow={onModal}
       >
-        <Form>
+        <FormModal ref={ref}>
           {inputs.map((item) => (
             <Input
               {...item}
@@ -149,7 +161,7 @@ const Home = ({ data }) => {
             label="Add tool"
             appearance="primary"
           />
-        </Form>
+        </FormModal>
       </Modal>
     </View>
   );
