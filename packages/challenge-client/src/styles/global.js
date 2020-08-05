@@ -111,7 +111,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: ${weight.regular};
     letter-spacing: .4px;
   }
-
+  
   small {
     font-size: ${size.s2};
     line-height: 24px;

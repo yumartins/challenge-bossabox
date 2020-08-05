@@ -2,16 +2,17 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 import {
+  array,
   object,
-  number,
-  string,
   objectOf,
   oneOfType,
 } from 'prop-types';
 
+import IconError from '../assets/svgs/icon-error.svg';
 import IconPlus from '../assets/svgs/icon-plus.svg';
 import Logo from '../assets/svgs/logo.svg';
 import Button from '../components/Button';
+import Card from '../components/Card';
 import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import useFetch from '../hooks/useFetch';
@@ -74,8 +75,17 @@ const Home = ({ data }) => {
           title,
           description,
         }) => (
-          <div key={id}>
-            <h4>{title}</h4>
+          <Card key={id}>
+            <div>
+              <h4>{title}</h4>
+              <Button
+                icon={<IconError />}
+                size="sm"
+                label="Remove"
+                appearance="danger"
+              />
+            </div>
+
             <p>{description}</p>
 
             <ul>
@@ -83,7 +93,7 @@ const Home = ({ data }) => {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-          </div>
+          </Card>
         ))}
       </Body>
     </View>
@@ -92,7 +102,7 @@ const Home = ({ data }) => {
 
 Home.propTypes = {
   data: objectOf(oneOfType(([
-    object, number, string,
+    object, array,
   ]))),
 };
 
