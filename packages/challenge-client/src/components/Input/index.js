@@ -10,6 +10,7 @@ export const Input = ({
   name,
   label,
   required,
+  textarea,
   ...rest
 }) => {
   const ref = useRef(null);
@@ -31,7 +32,7 @@ export const Input = ({
   }, [fieldName, registerField]);
 
   return (
-    <View>
+    <View error={error}>
       {label && (
         <label htmlFor={name}>
           {label}
@@ -40,14 +41,27 @@ export const Input = ({
       )}
 
       <Wrapper>
-        <input
-          {...rest}
-          id={fieldName}
-          ref={ref}
-          onFocus={clearError}
-          required={required}
-          defaultValue={defaultValue}
-        />
+        {! textarea
+          ? (
+            <input
+              {...rest}
+              id={fieldName}
+              ref={ref}
+              onFocus={clearError}
+              required={required}
+              defaultValue={defaultValue}
+            />
+          ) : (
+            <textarea
+              {...rest}
+              id={fieldName}
+              ref={ref}
+              rows={6}
+              onFocus={clearError}
+              required={required}
+              defaultValue={defaultValue}
+            />
+          )}
       </Wrapper>
 
       {error && <Error>{error}</Error>}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { Form } from '@unform/web';
 import Link from 'next/link';
 import {
   array,
@@ -113,6 +114,21 @@ const Home = ({ data }) => {
             Add new tool
           </h4>
 
+          <Form>
+            <Input
+              name="name"
+              label="Hello"
+              required
+            />
+
+            <Input
+              error
+              name="message"
+              label="Hello"
+              required
+              textarea
+            />
+          </Form>
         </Card>
       </Modal>
     </View>
