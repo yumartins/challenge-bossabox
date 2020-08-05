@@ -13,7 +13,7 @@
   "babel": {
     "presets": [
       "next/babel",
-      "module:groovy-babel"
+      "module:challenge-babel"
     ],
     "plugins": [
       "@babel/plugin-proposal-do-expressions",
