@@ -40,16 +40,23 @@ export const Wrapper = styled.div`
   align-items: center;
 
   svg {
-    right: 20px;
+    left: 16px;
+    z-index: 2;
     position: absolute;
+
+    g {
+      stroke: ${ink.lighter};
+    }
   }
 
   input {
     width: 100%;
     color: ${ink.base};
     border: 1px solid ${white.darkest};
-    padding: 12px 20px;
+    padding: 12px 16px;
     position: relative;
+    font-size: ${size.s3};
+    line-height: 26px;
     transition: all .3s ${basic};
     border-radius: 5px;
     background-color: ${white.darker};
@@ -66,7 +73,7 @@ export const Wrapper = styled.div`
 
   ${({ hasSearch }) => hasSearch && css`
     input {
-      padding: 12px 40px 12px 20px;
+      padding: 12px 16px 12px 56px;
     }
   `}
 `;

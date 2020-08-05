@@ -24,13 +24,13 @@ const Input = ({
     )}
 
     <Wrapper hasSearch={hasSearch}>
+      {hasSearch && <IconSearch />}
+
       <input
         {...rest}
         id={name}
         required={required}
       />
-
-      {hasSearch && <IconSearch />}
     </Wrapper>
   </View>
 );
