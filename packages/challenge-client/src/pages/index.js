@@ -17,7 +17,7 @@ import Checkbox from '../components/Checkbox';
 import { Input, SearchInput } from '../components/Input';
 import useFetch from '../hooks/useFetch';
 import Modal from '../layouts/Modal';
-import api from '../services/api';
+import { api, error, schema } from '../services';
 import {
   Body,
   Head,
@@ -47,7 +47,7 @@ const Home = ({ data }) => {
 
   const inputs = [
     {
-      name: 'name',
+      name: 'title',
       label: 'Tool name',
       required: true,
       placeholder: 'Enter the name of the tool',
@@ -81,6 +81,9 @@ const Home = ({ data }) => {
 
       <h1>Very useful tools to remember</h1>
 
+      {/**
+       * Actions head
+       */}
       <Head>
         <SearchInput
           name="search"
@@ -103,6 +106,9 @@ const Home = ({ data }) => {
         />
       </Head>
 
+      {/**
+       * Listen cards
+       */}
       <Body>
         {tools?.map(({
           id,
