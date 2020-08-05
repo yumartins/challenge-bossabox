@@ -2,7 +2,9 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 
+import IconPlus from '../assets/svgs/icon-plus.svg';
 import Logo from '../assets/svgs/logo.svg';
+import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import { Head, View } from '../styles/pages/home';
@@ -32,6 +34,13 @@ const Home = () => {
           label="Search in tags only"
           checked={checked}
           onChecked={onChecked}
+        />
+
+        <Button
+          icon={<IconPlus />}
+          size="md"
+          label="Add"
+          appearance="primary"
         />
       </Head>
     </View>

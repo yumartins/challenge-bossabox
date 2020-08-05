@@ -8,4 +8,17 @@ export const View = styled(Layout)`
   }
 `;
 
-export const Head = styled.div``;
+export const Head = styled.div`
+  display: flex;
+  margin-top: 64px;
+  align-items: center;
+
+  & > div:first-child {
+    max-width: 324px;
+    margin-right: 24px;
+  }
+
+  button {
+    margin-left: auto;
+  }
+`;
