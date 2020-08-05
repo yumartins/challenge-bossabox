@@ -89,8 +89,10 @@ export const Modal = styled.div`
 
   & > div {
     top: 32px;
+    display: flex;
     position: relative;
     transition: all .6s ${rubber};
+    flex-direction: column;
 
     & > svg {
       top: 30px;
@@ -101,6 +103,18 @@ export const Modal = styled.div`
 
     h4 svg {
       margin-right: 12px;
+    }
+
+    form {
+      margin-top: 24px;
+
+      & > div {
+        margin-top: 16px;
+      }
+
+      button {
+        margin: 24px 0 0 auto;
+      }
     }
   }
 

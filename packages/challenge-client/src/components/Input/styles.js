@@ -80,7 +80,7 @@ export const View = styled.div`
   label {
     display: flex;
     font-weight: ${weight.semiBold};
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     
     span {
       color: ${ink.light};

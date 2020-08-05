@@ -18,12 +18,12 @@ import Card from '../components/Card';
 import Checkbox from '../components/Checkbox';
 import { Input, SearchInput } from '../components/Input';
 import useFetch from '../hooks/useFetch';
+import Modal from '../layouts/Modal';
 import api from '../services/api';
 import {
   Body,
   Head,
   View,
-  Modal,
 } from '../styles/pages/home';
 
 export const getStaticProps = async () => {
@@ -131,24 +131,25 @@ const Home = ({ data }) => {
         ))}
       </Body>
 
-      <Modal show={modal}>
-        <Card isModal>
-          <IconCloseModal onClick={() => onModal(! modal)} />
+      <Modal
+        show={modal}
+        onShow={onModal}
+      >
+        <Form>
+          {inputs.map((item) => (
+            <Input
+              {...item}
+              key={item.name}
+            />
+          ))}
 
-          <h4>
-            <IconPlus />
-            Add new tool
-          </h4>
-
-          <Form>
-            {inputs.map((item) => (
-              <Input
-                {...item}
-                key={item.name}
-              />
-            ))}
-          </Form>
-        </Card>
+          <Button
+            submit
+            size="md"
+            label="Add tool"
+            appearance="primary"
+          />
+        </Form>
       </Modal>
     </View>
   );

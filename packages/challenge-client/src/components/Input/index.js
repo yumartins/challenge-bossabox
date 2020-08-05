@@ -48,7 +48,6 @@ export const Input = ({
               id={fieldName}
               ref={ref}
               onFocus={clearError}
-              required={required}
               defaultValue={defaultValue}
             />
           ) : (
@@ -56,9 +55,8 @@ export const Input = ({
               {...rest}
               id={fieldName}
               ref={ref}
-              rows={6}
+              rows={4}
               onFocus={clearError}
-              required={required}
               defaultValue={defaultValue}
             />
           )}
