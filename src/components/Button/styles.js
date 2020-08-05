@@ -68,10 +68,18 @@ export const View = styled.button`
 
   ${({ appearance }) => appearance === appearances.secondary && css`
     color: ${blue.base};
-    background-color: transparent;
+    background-color: ${blue.most_lightest};
 
     ${Icon} svg path {
       stroke: ${blue.base};
+    }
+
+    &:hover {
+      background-color: ${blue.lightest};
+    }
+
+    &:focus {
+      background-color: ${blue.lighter};
     }
   `}
 
