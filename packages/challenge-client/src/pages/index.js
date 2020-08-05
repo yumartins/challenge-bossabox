@@ -2,10 +2,10 @@ import { useRef, useState } from 'react';
 
 import Link from 'next/link';
 import {
-  array,
-  object,
-  objectOf,
-  oneOfType,
+  shape,
+  number,
+  string,
+  arrayOf,
 } from 'prop-types';
 import * as Yup from 'yup';
 
@@ -24,10 +24,11 @@ import {
   Head,
   View,
   FormModal,
+  DeleteModal,
 } from '../styles/pages/home';
 
 export const getStaticProps = async () => {
-  const { data } = await api.get('/');
+  const { data } = await api.get('/tools');
 
   return {
     props: {
@@ -37,12 +38,13 @@ export const getStaticProps = async () => {
 };
 
 const Home = ({ data }) => {
+  const response = useFetch('/tools', data);
+
   const [modal, onModal] = useState(false);
   const [checked, onChecked] = useState(false);
+  const [exclude, onExclude] = useState(false);
 
-  const response = useFetch('/', data);
-
-  const { tools } = response.data;
+  const tools = response.data;
 
   const ref = useRef(null);
 
@@ -78,30 +80,23 @@ const Home = ({ data }) => {
   /**
    * Submit form
    */
-  const submit = async (data, type) => {
-    const add = async () => {
-      try {
-        await Yup.object().shape({ ...schema }).validate(data, {
-          abortEarly: false,
-        });
-      } catch (err) {
-        error(err, ref);
-      }
-    };
+  const add = async (value) => {
+    try {
+      await Yup.object().shape({ ...schema }).validate(value, {
+        abortEarly: false,
+      });
 
-    const remove = () => {};
-
-    switch (type) {
-      case 'add':
-        add();
-        break;
-
-      case 'remove':
-        remove();
-        break;
-
-      default: break;
+      await api.post('/tools', {
+        ...value,
+        tags: value.tags.split(' '),
+      }).then(() => onModal(! modal));
+    } catch (err) {
+      error(err, ref);
     }
+  };
+
+  const remove = async (id) => {
+    await api.delete(`/tools/${id}`).then(() => console.log(`Excluido ${id}`));
   };
 
   return (
@@ -150,32 +145,54 @@ const Home = ({ data }) => {
           title,
           description,
         }) => (
-          <Card key={id}>
-            <div>
-              <a
-                href={link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <h4>{title}</h4>
-              </a>
+          <li key={id}>
+            <Card>
+              <div>
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <h4>{title}</h4>
+                </a>
 
-              <Button
-                icon={<IconError />}
-                size="sm"
-                label="Remove"
-                appearance="danger"
-              />
-            </div>
+                <Button
+                  icon={<IconError />}
+                  size="sm"
+                  label="Remove"
+                  appearance="danger"
+                  onClick={() => onExclude(! exclude)}
+                />
+              </div>
 
-            <p>{description}</p>
+              <p>{description}</p>
 
-            <ul>
-              {tags?.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </Card>
+              <ul>
+                {tags?.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </Card>
+
+            <Modal
+              show={exclude}
+              onShow={onExclude}
+            >
+              <DeleteModal>
+                <p>{`Are you sure you want to remove ${title}`}</p>
+
+                <Button
+                  size="md"
+                  label="Add tool"
+                  appearance="primary"
+                  onClick={() => {
+                    remove(id);
+                    onExclude(! exclude);
+                  }}
+                />
+              </DeleteModal>
+            </Modal>
+          </li>
         ))}
       </Body>
 
@@ -188,7 +205,7 @@ const Home = ({ data }) => {
       >
         <FormModal
           ref={ref}
-          onSubmit={(value) => submit(value, 'add')}
+          onSubmit={add}
         >
           {inputs.map((item) => (
             <Input
@@ -210,13 +227,17 @@ const Home = ({ data }) => {
 };
 
 Home.propTypes = {
-  data: objectOf(oneOfType(([
-    object, array,
-  ]))),
+  data: arrayOf(shape({
+    id: number,
+    tags: arrayOf(string),
+    link: string,
+    title: string,
+    description: string,
+  })),
 };
 
 Home.defaultProps = {
-  data: {},
+  data: [],
 };
 
 export default Home;

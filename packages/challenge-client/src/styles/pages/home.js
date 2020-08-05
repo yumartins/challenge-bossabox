@@ -34,7 +34,7 @@ export const Head = styled.div`
   }
 `;
 
-export const Body = styled.div`
+export const Body = styled.ul`
   margin-top: 64px;
 
   h4 {
@@ -61,11 +61,13 @@ export const Body = styled.div`
     }
   }
 
-  & > div {
+  & > li {
     & > div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      & > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
     }
 
     &:not(:first-child) {
@@ -83,3 +85,5 @@ export const FormModal = styled(Unform)`
     margin: 24px 0 0 auto;
   }
 `;
+
+export const DeleteModal = styled.div``;

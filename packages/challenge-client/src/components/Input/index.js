@@ -90,11 +90,13 @@ Input.propTypes = {
   name: string.isRequired,
   label: oneOfType([bool, string]),
   required: bool,
+  textarea: bool,
 };
 
 Input.defaultProps = {
   label: false,
   required: false,
+  textarea: false,
 };
 
 SearchInput.propTypes = {
