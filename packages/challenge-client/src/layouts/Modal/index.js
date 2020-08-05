@@ -3,8 +3,6 @@ import {
   bool,
   oneOf,
   object,
-  symbol,
-  objectOf,
   oneOfType,
 } from 'prop-types';
 
@@ -42,9 +40,7 @@ Modal.propTypes = {
   type: oneOf(['add', 'remove']),
   show: bool,
   onShow: func,
-  children: objectOf(oneOfType([
-    symbol, object,
-  ])),
+  children: oneOfType([bool, object]),
 };
 
 Modal.defaultProps = {

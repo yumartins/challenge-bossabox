@@ -1,4 +1,9 @@
-import { bool, arrayOf, element } from 'prop-types';
+import {
+  bool,
+  arrayOf,
+  element,
+  oneOfType,
+} from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { colors, shadow, animate } from '../styles';
@@ -52,7 +57,9 @@ const Card = ({
 
 Card.propTypes = {
   isModal: bool,
-  children: arrayOf(element),
+  children: arrayOf(oneOfType([
+    element, bool,
+  ])),
 };
 
 Card.defaultProps = {

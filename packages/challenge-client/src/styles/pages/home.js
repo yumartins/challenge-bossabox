@@ -37,41 +37,39 @@ export const Head = styled.div`
 export const Body = styled.ul`
   margin-top: 64px;
 
-  h4 {
-    text-transform: capitalize;
-  }
-
-  p {
-    margin-top: 24px;
-  }
-
-  ul {
-    display: flex;
-    margin-top: 32px;
-    align-items: center;
-
-    li {
-      color: ${ink.base};
-      padding: 4px;
-      border-radius: 4px;
-
-      &:not(:first-child) {
-        margin-left: 12px;
-      }
-    }
-  }
-
-  & > li {
-    & > div {
-      & > div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-
+  & > div {
     &:not(:first-child) {
       margin-top: 24px;
+    }
+
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    h4 {
+      text-transform: capitalize;
+    }
+
+    p {
+      margin-top: 24px;
+    }
+
+    ul {
+      display: flex;
+      margin-top: 32px;
+      align-items: center;
+
+      li {
+        color: ${ink.base};
+        padding: 4px;
+        border-radius: 4px;
+
+        &:not(:first-child) {
+          margin-left: 12px;
+        }
+      }
     }
   }
 `;
@@ -86,4 +84,15 @@ export const FormModal = styled(Unform)`
   }
 `;
 
-export const DeleteModal = styled.div``;
+export const DeleteModal = styled.div`
+  div {
+    display: flex;
+    margin-top: 48px;
+    align-items: center;
+    justify-content: flex-end;
+
+    button:first-child {
+      margin-right: 24px;
+    }
+  }
+`;

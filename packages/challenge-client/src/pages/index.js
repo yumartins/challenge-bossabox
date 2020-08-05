@@ -43,6 +43,7 @@ const Home = ({ data }) => {
   const [modal, onModal] = useState(false);
   const [checked, onChecked] = useState(false);
   const [exclude, onExclude] = useState(false);
+  const [excludeIdx, onExcludeIdx] = useState(-1);
 
   const tools = response.data;
 
@@ -96,7 +97,8 @@ const Home = ({ data }) => {
   };
 
   const remove = async (id) => {
-    await api.delete(`/tools/${id}`).then(() => console.log(`Excluido ${id}`));
+    await api.delete(`/tools/${id}`);
+    onExclude(! exclude);
   };
 
   return (
@@ -144,55 +146,37 @@ const Home = ({ data }) => {
           tags,
           title,
           description,
-        }) => (
-          <li key={id}>
-            <Card>
-              <div>
-                <a
-                  href={link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <h4>{title}</h4>
-                </a>
+        }, index) => (
+          <Card key={id}>
+            <div>
+              <a
+                href={link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <h4>{title}</h4>
+              </a>
 
-                <Button
-                  icon={<IconError />}
-                  size="sm"
-                  label="Remove"
-                  appearance="danger"
-                  onClick={() => onExclude(! exclude)}
-                />
-              </div>
+              <Button
+                icon={<IconError />}
+                size="sm"
+                label="Remove"
+                appearance="danger"
+                onClick={() => {
+                  onExclude(! exclude);
+                  onExcludeIdx(index);
+                }}
+              />
+            </div>
 
-              <p>{description}</p>
+            <p>{description}</p>
 
-              <ul>
-                {tags?.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </Card>
-
-            <Modal
-              show={exclude}
-              onShow={onExclude}
-            >
-              <DeleteModal>
-                <p>{`Are you sure you want to remove ${title}`}</p>
-
-                <Button
-                  size="md"
-                  label="Add tool"
-                  appearance="primary"
-                  onClick={() => {
-                    remove(id);
-                    onExclude(! exclude);
-                  }}
-                />
-              </DeleteModal>
-            </Modal>
-          </li>
+            <ul>
+              {tags?.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </Card>
         ))}
       </Body>
 
@@ -221,6 +205,37 @@ const Home = ({ data }) => {
             appearance="primary"
           />
         </FormModal>
+      </Modal>
+
+      {/**
+       * Modal for remove tool
+       */}
+      <Modal
+        type="remove"
+        show={exclude}
+        onShow={onExclude}
+      >
+        {excludeIdx !== -1 && (
+          <DeleteModal>
+            <p>{`Are you sure you want to remove "${tools[excludeIdx].title}"`}</p>
+
+            <div>
+              <Button
+                size="md"
+                label="Cancel"
+                appearance="secondary"
+                onClick={() => onExclude(! exclude)}
+              />
+
+              <Button
+                size="md"
+                label="Yes, remove"
+                appearance="primary"
+                onClick={() => remove(tools[excludeIdx].id)}
+              />
+            </div>
+          </DeleteModal>
+        )}
       </Modal>
     </View>
   );
