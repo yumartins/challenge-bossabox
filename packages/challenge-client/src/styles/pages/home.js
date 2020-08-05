@@ -34,7 +34,7 @@ export const Head = styled.div`
   }
 `;
 
-export const Body = styled.ul`
+export const Body = styled.div`
   margin-top: 64px;
 
   & > div {

@@ -38,16 +38,16 @@ export const getStaticProps = async () => {
 };
 
 const Home = ({ data }) => {
-  const response = useFetch('/tools', data);
-
   const [modal, onModal] = useState(false);
   const [checked, onChecked] = useState(false);
   const [exclude, onExclude] = useState(false);
   const [excludeIdx, onExcludeIdx] = useState(-1);
 
-  const tools = response.data;
+  const { data: tools, mutate } = useFetch('/tools', data);
 
   const ref = useRef(null);
+
+  console.log(tools);
 
   /**
    * List inputs add modal
@@ -87,10 +87,15 @@ const Home = ({ data }) => {
         abortEarly: false,
       });
 
-      await api.post('/tools', {
+      const new_tool = {
         ...value,
         tags: value.tags.split(' '),
-      }).then(() => onModal(! modal));
+      };
+
+      await api.post('/tools', new_tool).then(() => {
+        mutate([...tools, new_tool], false);
+        onModal(! modal);
+      });
     } catch (err) {
       error(err, ref);
     }
@@ -99,6 +104,7 @@ const Home = ({ data }) => {
   const remove = async (id) => {
     await api.delete(`/tools/${id}`);
     onExclude(! exclude);
+    // mutate('/');
   };
 
   return (
