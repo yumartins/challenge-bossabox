@@ -19,7 +19,7 @@ import api from '../services/api';
 import { Head, View } from '../styles/pages/home';
 
 export const getStaticProps = async () => {
-  const { data } = await api.get('/api');
+  const { data } = await api.get('/');
 
   return {
     props: {
@@ -31,7 +31,7 @@ export const getStaticProps = async () => {
 const Home = ({ res }) => {
   const [checked, onChecked] = useState(false);
 
-  const { data } = useFetch('/api', res);
+  const { data } = useFetch('/', res);
 
   console.log(data);
 

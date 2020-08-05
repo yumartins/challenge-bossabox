@@ -6,12 +6,15 @@
   "description": "app api",
   "main": "build/index.js",
   "scripts": {
+    "app": "nodemon ./src/index.js",
     "build": "babel src --out-dir ./build --source-maps -D"
   },
   "babel": {
     "presets": [
-      "module:challenge-babel",
-      "@babel/preset-env"
+      "module:challenge-babel"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
