@@ -41,18 +41,14 @@ const Card = ({
   isModal,
   children,
   ...rest
-}) => {
-  console.log(children);
-
-  return (
-    <View
-      {...rest}
-      isModal={isModal}
-    >
-      {children}
-    </View>
-  );
-};
+}) => (
+  <View
+    {...rest}
+    isModal={isModal}
+  >
+    {children}
+  </View>
+);
 
 Card.propTypes = {
   isModal: bool,

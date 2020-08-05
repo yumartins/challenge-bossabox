@@ -15,7 +15,7 @@ import Logo from '../assets/svgs/logo.svg';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import Checkbox from '../components/Checkbox';
-import Input from '../components/Input';
+import { Input, SearchInput } from '../components/Input';
 import useFetch from '../hooks/useFetch';
 import api from '../services/api';
 import {
@@ -54,10 +54,9 @@ const Home = ({ data }) => {
       <h1>Very useful tools to remember</h1>
 
       <Head>
-        <Input
+        <SearchInput
           name="search"
           placeholder="search..."
-          hasSearch
         />
 
         <Checkbox

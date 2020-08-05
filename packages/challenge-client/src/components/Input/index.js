@@ -1,52 +1,96 @@
-import {
-  bool,
-  string,
-  object,
-  oneOfType,
-} from 'prop-types';
+import { useRef, useEffect } from 'react';
+
+import { useField } from '@unform/core';
+import { bool, string, oneOfType } from 'prop-types';
 
 import IconSearch from '../../assets/svgs/icon-search.svg';
-import { View, Wrapper } from './styles';
+import { View, Error, Wrapper } from './styles';
 
-const Input = ({
+export const Input = ({
   name,
   label,
   required,
-  hasSearch,
+  ...rest
+}) => {
+  const ref = useRef(null);
+
+  const {
+    error,
+    fieldName,
+    clearError,
+    defaultValue,
+    registerField,
+  } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: ref.current,
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
+
+  return (
+    <View>
+      {label && (
+        <label htmlFor={name}>
+          {label}
+          {required && <span>*</span>}
+        </label>
+      )}
+
+      <Wrapper>
+        <input
+          {...rest}
+          id={fieldName}
+          ref={ref}
+          onFocus={clearError}
+          required={required}
+          defaultValue={defaultValue}
+        />
+      </Wrapper>
+
+      {error && <Error>{error}</Error>}
+    </View>
+  );
+};
+
+export const SearchInput = ({
+  name,
+  label,
   ...rest
 }) => (
   <View>
-    {label && (
-      <label htmlFor={name}>
-        {label}
-        {required && <span>*</span>}
-      </label>
-    )}
+    {label && <label htmlFor={name}>{label}</label>}
 
-    <Wrapper hasSearch={hasSearch}>
-      {hasSearch && <IconSearch />}
+    <Wrapper hasSearch>
+      <IconSearch />
 
       <input
         {...rest}
         id={name}
-        required={required}
       />
     </Wrapper>
   </View>
 );
 
 Input.propTypes = {
-  name: string,
+  name: string.isRequired,
   label: oneOfType([bool, string]),
   required: bool,
-  hasSearch: oneOfType([bool, object]),
 };
 
 Input.defaultProps = {
-  name: '',
   label: false,
   required: false,
-  hasSearch: false,
 };
 
-export default Input;
+SearchInput.propTypes = {
+  name: string,
+  label: oneOfType([bool, string]),
+};
+
+SearchInput.defaultProps = {
+  name: '',
+  label: false,
+};

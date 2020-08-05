@@ -16,6 +16,8 @@ const {
   basic,
 } = animate;
 
+export const Error = styled.span``;
+
 export const View = styled.div`
   width: 100%;
   display: flex;
