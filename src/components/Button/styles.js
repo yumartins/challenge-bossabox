@@ -1,22 +1,32 @@
 import styled, { css } from 'styled-components';
 
-import { colors, typograph } from '../../styles';
+import { colors, typograph, animate } from '../../styles';
 
 const {
+  red,
   blue,
   white,
 } = colors;
 
 const {
-  size,
+  size: font,
   weight,
   family,
 } = typograph;
 
+const {
+  basic,
+} = animate;
+
+const sizes = {
+  sm: 'sm',
+  md: 'md',
+};
+
 const appearances = {
+  danger: 'danger',
   primary: 'primary',
   secondary: 'secondary',
-  tertiary: 'tertiary',
 };
 
 export const Icon = styled.span`
@@ -26,8 +36,8 @@ export const Icon = styled.span`
 export const View = styled.button`
   border: none;
   display: flex;
-  padding: 14px 26px;
-  font-size: ${size.s2};
+  font-size: ${font.s2};
+  transition: all .3s ${basic};
   font-family: ${family};
   font-weight: ${weight.semiBold};
   line-height: 24px;
@@ -46,6 +56,14 @@ export const View = styled.button`
     ${Icon} svg path {
       stroke: ${white.base};
     }
+
+    &:hover {
+      background-color: ${blue.dark};
+    }
+
+    &:focus {
+      background-color: ${blue.darker};
+    }
   `}
 
   ${({ appearance }) => appearance === appearances.secondary && css`
@@ -55,5 +73,33 @@ export const View = styled.button`
     ${Icon} svg path {
       stroke: ${blue.base};
     }
+  `}
+
+  ${({ appearance }) => appearance === appearances.danger && css`
+    color: ${red.base};
+    background-color: ${red.most_lightest};
+
+    ${Icon} svg path {
+      stroke: ${red.base};
+    }
+
+    &:hover {
+      background-color: ${red.lightest};
+    }
+
+    &:focus {
+      background-color: ${red.lighter};
+    }
+  `}
+
+  /**
+   * Sizes
+   */
+  ${({ size }) => size === sizes.sm && css`
+    padding: 6px 18px;
+  `}
+
+  ${({ size }) => size === sizes.md && css`
+    padding: 14px 26px;
   `}
 `;
