@@ -1,7 +1,9 @@
 import * as Yup from 'yup';
 
 export const schema = {
-  link: Yup.string().required('Enter the tool link =)'),
+  link: Yup.string()
+    .required('Enter the tool link =)')
+    .url('Please enter a valid url'),
   title: Yup.string().required('Enter the tool title =)'),
 };
 

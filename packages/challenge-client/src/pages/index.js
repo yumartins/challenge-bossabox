@@ -47,8 +47,6 @@ const Home = ({ data }) => {
 
   const ref = useRef(null);
 
-  console.log(tools);
-
   /**
    * List inputs add modal
    */
@@ -103,8 +101,13 @@ const Home = ({ data }) => {
 
   const remove = async (id) => {
     await api.delete(`/tools/${id}`);
+
+    onExcludeIdx(-1);
     onExclude(! exclude);
-    // mutate('/');
+
+    const removed = tools.filter((tool) => tool.id !== id);
+
+    mutate(removed, false);
   };
 
   return (
@@ -153,7 +156,7 @@ const Home = ({ data }) => {
           title,
           description,
         }, index) => (
-          <Card key={id}>
+          <Card key={id || title}>
             <div>
               <a
                 href={link}
