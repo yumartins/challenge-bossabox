@@ -7,6 +7,7 @@ import colors from '../colors';
 
 const {
   ink,
+  blue,
 } = colors;
 
 const {
@@ -60,18 +61,23 @@ export const Body = styled.div`
       display: flex;
       margin-top: 32px;
       align-items: center;
-
-      li {
-        color: ${ink.base};
-        padding: 4px;
-        border-radius: 4px;
-
-        &:not(:first-child) {
-          margin-left: 12px;
-        }
-      }
     }
   }
+`;
+
+export const Tag = styled.li`
+  color: ${ink.base};
+  padding: 4px;
+  border-radius: 4px;
+
+  &:not(:first-child) {
+    margin-left: 12px;
+  }
+
+  ${({ revealed }) => revealed && css`
+    color: ${blue.base};
+    background-color: ${blue.lightest};
+  `}
 `;
 
 export const EmptyTools = styled.div`

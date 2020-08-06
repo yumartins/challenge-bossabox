@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 
 import Link from 'next/link';
 import {
@@ -20,6 +20,7 @@ import useFetch from '../hooks/useFetch';
 import Modal from '../layouts/Modal';
 import { api, error, schema } from '../services';
 import {
+  Tag,
   Body,
   Head,
   View,
@@ -45,6 +46,7 @@ const Home = ({ data }) => {
   const [exclude, onExclude] = useState(false);
   const [excludeIdx, onExcludeIdx] = useState(-1);
 
+  // eslint-disable-next-line
   const handleQuery = query.length && ! checked
     ? `?q=${query}`
     : query.length && checked
@@ -197,7 +199,13 @@ const Home = ({ data }) => {
 
             <ul>
               {tags?.map((item) => (
-                <li key={item}>{item}</li>
+                <Tag
+                  key={item}
+                  revealed={query.length && item === query}
+                  // revealed={query.length && item.indexOf(query) !== -1}
+                >
+                  {item}
+                </Tag>
               ))}
             </ul>
           </Card>
