@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import Link from 'next/link';
 import {
@@ -39,13 +39,20 @@ export const getStaticProps = async () => {
 
 const Home = ({ data }) => {
   const [modal, onModal] = useState(false);
+  const [search, onSearch] = useState('');
   const [checked, onChecked] = useState(false);
   const [exclude, onExclude] = useState(false);
   const [excludeIdx, onExcludeIdx] = useState(-1);
 
-  const { data: tools, mutate } = useFetch('/tools', data);
+  const { data: tools, mutate } = useFetch(`/tools${
+    search.length ? `?q=${search}` : ''}`, data);
 
   const ref = useRef(null);
+
+  console.log(`/tools${
+    search.length ? `?q=${search}` : ''}`);
+
+  const filtered = tools ? [].concat(...tools) : [];
 
   /**
    * List inputs add modal
@@ -77,7 +84,7 @@ const Home = ({ data }) => {
   ];
 
   /**
-   * Submit form
+   * Submit form add tool
    */
   const add = async (value) => {
     try {
@@ -99,11 +106,14 @@ const Home = ({ data }) => {
     }
   };
 
+  /**
+   * Submit form remove tool
+   */
   const remove = async (id) => {
     await api.delete(`/tools/${id}`);
 
-    onExcludeIdx(-1);
     onExclude(! exclude);
+    onExcludeIdx(-1);
 
     const removed = tools.filter((tool) => tool.id !== id);
 
@@ -126,6 +136,8 @@ const Home = ({ data }) => {
       <Head>
         <SearchInput
           name="search"
+          value={search}
+          onChange={({ target }) => onSearch(target.value)}
           placeholder="search..."
         />
 
@@ -149,7 +161,7 @@ const Home = ({ data }) => {
        * Listen cards
        */}
       <Body>
-        {tools?.map(({
+        {filtered?.map(({
           id,
           link,
           tags,
