@@ -13,11 +13,9 @@
   },
   "scripts": {
     "app": "lerna run app --scope challenge-api --scope challenge-client --parallel",
+    "test": "bash ./.bin/sugar.sh test $*",
+    "build": "bash .bin/sugar.sh build $*",
     "lint:css": "stylelint ./src/**/*.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
