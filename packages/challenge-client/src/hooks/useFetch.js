@@ -9,6 +9,8 @@ const useFetch = (url, initialData) => {
     return response.data;
   }, {
     initialData,
+    revalidateOnMount: true,
+    revalidateOnFocus: true,
   });
 
   return { data, error, mutate };

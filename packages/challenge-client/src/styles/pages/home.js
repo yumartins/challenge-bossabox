@@ -74,6 +74,15 @@ export const Body = styled.div`
   }
 `;
 
+export const EmptyTools = styled.div`
+  margin: 64px auto 0 auto;
+  text-align: center;
+
+  h5 {
+    color: ${ink.light};
+  }
+`;
+
 export const FormModal = styled(Unform)`
   & > div {
     margin-top: 16px;

@@ -6,7 +6,7 @@
   "description": "app api",
   "main": "build/index.js",
   "scripts": {
-    "app": "json-server --watch --port 5000 ./src/db.json",
+    "app": "nodemon ./src/index.js",
     "build": "babel src --out-dir ./build --source-maps -D"
   },
   "babel": {

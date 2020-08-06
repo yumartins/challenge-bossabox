@@ -1,8 +1,10 @@
-const cors = require('cors');
-const express = require('express');
+const jsonServer = require('json-server');
+const path = require('path');
 
-const app = express();
+const server = jsonServer.create();
+const router = jsonServer.router(path.join(__dirname, './db.json'));
+const middlewares = jsonServer.defaults();
 
-app.use(cors());
-
-app.listen(5000, () => console.log('Ready api => 5000'));
+server.use(middlewares);
+server.use(router);
+server.listen(5000, () => console.log('Ready api => http://localhost:5000'));

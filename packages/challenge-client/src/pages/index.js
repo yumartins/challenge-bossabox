@@ -24,6 +24,7 @@ import {
   Head,
   View,
   FormModal,
+  EmptyTools,
   DeleteModal,
 } from '../styles/pages/home';
 
@@ -39,18 +40,20 @@ export const getStaticProps = async () => {
 
 const Home = ({ data }) => {
   const [modal, onModal] = useState(false);
-  const [search, onSearch] = useState('');
+  const [query, onQuery] = useState('');
   const [checked, onChecked] = useState(false);
   const [exclude, onExclude] = useState(false);
   const [excludeIdx, onExcludeIdx] = useState(-1);
 
-  const { data: tools, mutate } = useFetch(`/tools${
-    search.length ? `?q=${search}` : ''}`, data);
+  const handleQuery = query.length && ! checked
+    ? `?q=${query}`
+    : query.length && checked
+      ? `?tags_like=${query}`
+      : '';
+
+  const { data: tools, mutate } = useFetch(`/tools${handleQuery}`, data);
 
   const ref = useRef(null);
-
-  console.log(`/tools${
-    search.length ? `?q=${search}` : ''}`);
 
   const filtered = tools ? [].concat(...tools) : [];
 
@@ -135,9 +138,9 @@ const Home = ({ data }) => {
        */}
       <Head>
         <SearchInput
-          name="search"
-          value={search}
-          onChange={({ target }) => onSearch(target.value)}
+          name="query"
+          value={query}
+          onChange={({ target }) => onQuery(target.value)}
           placeholder="search..."
         />
 
@@ -199,6 +202,16 @@ const Home = ({ data }) => {
             </ul>
           </Card>
         ))}
+
+        {filtered.length <= 0 && (
+          <EmptyTools>
+            <h5>
+              Sorry, did not find any
+              <br />
+              tools with that name
+            </h5>
+          </EmptyTools>
+        )}
       </Body>
 
       {/**

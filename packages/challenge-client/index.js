@@ -13,5 +13,5 @@ app.prepare().then(() => {
 
   server.all('*', (req, res) => handle(req, res));
 
-  server.listen(3000, () => console.log('Ready client => 3000'));
+  server.listen(3000, () => console.log('Ready client => http://localhost:3000'));
 });
