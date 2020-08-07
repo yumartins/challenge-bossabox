@@ -7,8 +7,7 @@
   "private": false,
   "scripts": {
     "app": "node ./index.js",
-    "build": "next build && next export",
-    "develop": "next"
+    "build": "next build && next export"
   },
   "babel": {
     "presets": [
@@ -40,6 +39,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "next": "^9.5.2-canary.8",
+    "next-seo": "^4.7.3",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

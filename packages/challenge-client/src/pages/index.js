@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 
+import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import {
   shape,
@@ -127,6 +128,11 @@ const Home = ({ data }) => {
 
   return (
     <View>
+      <NextSeo
+        title="Vuttr | App"
+        description="Very useful tools to remember"
+      />
+
       <Link href="/">
         <a>
           <Logo />
