@@ -15,7 +15,7 @@ $ git clone git@github.com:yumartins/challenge-bossabox.git
 $ cd challenge-bossabox
 ```
 
-Instale as dependências usando `yarn`.
+Instale as dependências utilizando `yarn`.
 
 ```bash
 $ yarn
@@ -33,10 +33,10 @@ Como o projeto rodando com o script `app`, caso queira rodar o build, basta roda
 $ yarn build
 ```
 
-O app (Front), vai estar no caminho.
+O app, vai estar no caminho.
 
 ```bash
-$ /packages/challenge-client/out
+$ cd packages/challenge-client/out
 ```
 
 E é isso ...
