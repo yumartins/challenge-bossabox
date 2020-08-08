@@ -39,5 +39,7 @@ O app, vai estar no caminho.
 $ cd packages/challenge-client/out
 ```
 
+Para testar a demo, [veja no Netlify](https://competent-jennings-c84aeb.netlify.app/)
+
 E é isso ...
 Tks ❤️
